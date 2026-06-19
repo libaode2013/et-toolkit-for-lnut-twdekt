@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script defer type="text/javascript" src="./main.js"></script>
+    <style>
+        body {
+            user-select: none;
+            line-height: 175%;
+        }
+
+        fieldset {
+            margin-bottom: 1em;
+        }
+
+        #grade-filter {
+            width: 4em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <fieldset id="select-input-books" name="option-group">
+        <legend>选择输入工作簿</legend>
+    </fieldset>
+
+    <fieldset id="set-data-filters" name="option-group">
+        <legend>筛选输入数据</legend>
+        <div id="set-college-filter">
+            <input type="checkbox" id="use-college-filter" name="data-filter">
+            <label for="use-college-filter">学院：</label>
+            <select id="college-filter" disabled></select>
+        </div>
+        <div id="set-grade-filter">
+            <input type="checkbox" id="use-grade-filter" name="data-filter">
+            <label for="use-grade-filter">年级：</label>
+            <input type="number" id="grade-filter" value="2023" step="1" disabled>
+        </div>
+        <div id="set-class-filter">
+            <input type="checkbox" id="use-class-filter" name="data-filter">
+            <label for="use-class-filter">班级：</label>
+            <input type="text" id="class-filter" disabled>
+        </div>
+    </fieldset>
+
+    <fieldset id="set-output-sheets" name="option-group">
+        <legend>设置输出工作表</legend>
+        <div>
+            <label for="output-sheet-type">表格拆分方式：</label>
+            <select id="output-sheet-type">
+                <option value="sheet-type-college">按【学院】拆分</option>
+                <option value="sheet-type-grade" selected>按【年级】拆分</option>
+                <option value="sheet-type-class">按【班级】拆分</option>
+                <option value="sheet-type-all-in-one">不拆分为多个表格</option>
+            </select>
+        </div>
+        <div>
+            <label for="credit-standred-version">学分标准版本：</label>
+            <select id="credit-standred-version">
+                <option value="standred-version-auto">自动识别</option>
+                <option value="standred-version-2019">2019版</option>
+                <option value="standred-version-2023">2023版</option>
+            </select>
+        </div>
+        <div>
+            <input type="checkbox" id="recalculate-total-credits" checked>
+            <label for="recalculate-total-credits">重新计算学分总和</label>
+        </div>
+        <div>
+            <input type="checkbox" id="calculate-annual-average-valid-credits">
+            <label for="calculate-annual-average-valid-credits">计算学年平均有效学分</label>
+        </div>
+        <div>
+            <input type="checkbox" id="store-output-data-as-values">
+            <label for="store-output-data-as-values">输出数据存储为值</label>
+        </div>
+        <button id="show-advanced-options-for-output-sheets">显示高级选项</button>
+        <div id="advanced-options-for-output-sheets" hidden>
+            <div>
+                <input type="checkbox" id="delete-college-column">
+                <label for="delete-college-column">删除【学院】列数据</label>
+            </div>
+            <div>
+                <input type="checkbox" id="delete-grade-column">
+                <label for="delete-grade-column">删除【年级】列数据</label>
+            </div>
+            <div>
+                <input type="checkbox" id="delete-class-column">
+                <label for="delete-class-column">删除【班级】列数据</label>
+            </div>
+            <div hidden>
+                <input type="checkbox" id="delete-time-columns">
+                <label for="delete-time-columns">删除【参与时间】列数据</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <button id="start-button" onclick="main()" disabled>开始</button>
+
+    <p>旧版本 - 20260116A</p>
+
+</body>
+
+</html>

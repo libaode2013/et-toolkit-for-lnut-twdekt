@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script defer type="text/javascript" src="./main.js"></script>
+    <style>
+        body {
+            user-select: none;
+            line-height: 175%;
+        }
+
+        fieldset {
+            margin-bottom: 8px;
+        }
+
+        #grade-filter-input {
+            width: 4em;
+        }
+
+        #class-filter-input {
+            width: 6em;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset name="option-group" disabled>
+        <legend>选择输入工作簿</legend>
+        <button id="hide-invalid-input-files">隐藏无效的输入文件</button>
+        <div id="input-book-list"></div>
+        <label id="no-valid-input-file" hidden>未找到有效的输入文件</label>
+    </fieldset>
+    <fieldset name="option-group" disabled>
+        <legend>筛选输入数据</legend>
+        <div>
+            <input type="checkbox" id="use-college-filter" name="input-data-filter">
+            <label for="use-college-filter">学院：</label>
+            <select id="college-filter-input" disabled></select>
+        </div>
+        <div>
+            <input type="checkbox" id="use-grade-filter" name="input-data-filter">
+            <label for="use-grade-filter">年级：</label>
+            <select id="grade-filter-operator" disabled>
+                <option value="greater">大于 ＞</option>
+                <option value="less">小于 ＜</option>
+                <option value="equal" selected>等于 ＝</option>
+                <option value="greater-or-equal">大于等于</option>
+                <option value="less-or-equal">小于等于</option>
+                <option value="not-equal">不等于</option>
+            </select>
+            <input type="number" id="grade-filter-input" value="2023" step="1" disabled>
+        </div>
+        <div>
+            <input type="checkbox" id="use-class-filter" name="input-data-filter">
+            <label for="use-class-filter">班级：</label>
+            <select id="class-filter-operator" disabled>
+                <option value="exact-match">完全匹配</option>
+                <option value="partial-match">部分匹配</option>
+            </select>
+            <input type="text" id="class-filter-input" disabled>
+        </div>
+    </fieldset>
+    <fieldset name="option-group" disabled>
+        <legend>设置输出工作表</legend>
+        <div>
+            <label for="output-sheet-type">表格拆分方式：</label>
+            <select id="output-sheet-type">
+                <option value="sheet-type-college">按【学院】拆分</option>
+                <option value="sheet-type-grade" selected>按【年级】拆分</option>
+                <option value="sheet-type-class">按【班级】拆分</option>
+                <option value="sheet-type-all-in-one">不拆分为多个表格</option>
+            </select>
+        </div>
+        <div>
+            <label for="credit-standred-version">学分标准版本：</label>
+            <select id="credit-standred-version">
+                <option value="standred-version-auto">自动识别</option>
+                <option value="standred-version-2019">2019版</option>
+                <option value="standred-version-2023">2023版</option>
+            </select>
+        </div>
+        <div>
+            <input type="checkbox" id="recalculate-total-credits" checked>
+            <label for="recalculate-total-credits">重新计算学分总和</label>
+        </div>
+        <div>
+            <input type="checkbox" id="calculate-annual-average-valid-credits">
+            <label for="calculate-annual-average-valid-credits">计算学年平均有效学分</label>
+        </div>
+        <div>
+            <input type="checkbox" id="delete-not-good-result-rows">
+            <label for="delete-not-good-result-rows">删除【参评资格】为 NG 的数据</label>
+        </div>
+        <div>
+            <input type="checkbox" id="convert-output-data-into-values">
+            <label for="convert-output-data-into-values">输出数据转换为值</label>
+        </div>
+        <div>
+            <input type="checkbox" id="delete-enrollment-year-column" name="delete-columns-in-output-sheets">
+            <label for="delete-enrollment-year-column">删除【入学年份】列数据</label>
+        </div>
+        <button id="show-advanced-options-for-output-sheets">显示高级选项</button>
+        <div id="advanced-options-for-output-sheets" hidden>
+            <div>
+                <input type="checkbox" id="delete-college-column" name="delete-columns-in-output-sheets">
+                <label for="delete-college-column">删除【学院】列数据</label>
+            </div>
+            <div>
+                <input type="checkbox" id="delete-grade-column" name="delete-columns-in-output-sheets">
+                <label for="delete-grade-column">删除【年级】列数据</label>
+            </div>
+            <div>
+                <input type="checkbox" id="delete-class-column" name="delete-columns-in-output-sheets">
+                <label for="delete-class-column">删除【班级】列数据</label>
+            </div>
+            <div>
+                <input type="checkbox" id="delete-statistical-time-columns" name="delete-columns-in-output-sheets">
+                <label for="delete-statistical-time-columns">删除【统计时间】2 列数据</label>
+            </div>
+        </div>
+    </fieldset>
+    <button id="start-button" disabled>开始</button>
+    <p>旧版本 - 20260122A</p>
+</body>
+
+</html>
