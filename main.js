@@ -4,10 +4,10 @@ function getUrlPath() {
 }
 
 function onAction(control) {
-    switch (control.Id) {
-        case "default-button":
-            // window.Application.ShowDialog(getUrlPath() + "/ui/dialog.html", "这是一个对话框网页", 400 * window.devicePixelRatio, 400 * window.devicePixelRatio, false);
-            alert("Hello, World!");
+    const eleId = control.Id;
+    switch (eleId) {
+        case "dialog/detail-and-summary/check-graduation-qualification/version-20260619A":
+            window.Application.ShowDialog(`${getUrlPath()}/${eleId}/index.html`, "汇总+明细（检查毕业资格）", 320 * window.devicePixelRatio, 640 * window.devicePixelRatio);
             break;
         default:
             return true;
@@ -15,7 +15,8 @@ function onAction(control) {
 }
 
 function getImage(control) {
-    switch (control.Id) {
+    const eleId = control.Id;
+    switch (eleId) {
 
         default:
             return "images/error-picture.svg";

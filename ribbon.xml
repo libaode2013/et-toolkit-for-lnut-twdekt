@@ -1,9 +1,12 @@
-<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="OnAddinLoad">
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui">
     <ribbon startFromScratch="false">
         <tabs>
             <tab id="et-toolkit" label="ET Toolkit">
                 <group id="default-group" label="default-group">
-                    <button id="default-button" label="default-button" onAction="onAction" getImage="getImage"></button>
+                    <!-- 汇总+明细（检查毕业资格） -->
+                    <splitButton id="dialog/detail-and-summary/check-graduation-qualification/latest-version" getImage="getImage">
+                        <button id="dialog/detail-and-summary/check-graduation-qualification/version-20260619A" label="汇总+明细（检查毕业资格）" onAction="onAction"></button>
+                    </splitButton>
                 </group>
             </tab>
         </tabs>

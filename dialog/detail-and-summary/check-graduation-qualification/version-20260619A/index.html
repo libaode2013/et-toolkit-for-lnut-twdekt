@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script defer type="text/javascript" src="./main.js"></script>
+    <style>
+        body {
+            user-select: none;
+            line-height: 175%;
+        }
+
+        fieldset {
+            margin-bottom: 8px;
+        }
+
+        #no-valid-summary-files,
+        #no-valid-detail-files {
+            color: red;
+        }
+
+        #grade-filter-input {
+            width: 4em;
+        }
+
+        #class-filter-input {
+            width: 6em;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset disabled>
+        <legend>选择学分汇总文件</legend>
+        <div>
+            <button id="select-all-summary-files">全选</button>
+            <button id="deselect-all-summary-files">全不选</button>
+            <button id="hide-invalid-summary-files">隐藏无效文件</button>
+        </div>
+        <div id="summary-book-list"></div>
+        <label id="no-valid-summary-files" hidden>未找到有效的学分汇总文件</label>
+    </fieldset>
+
+    <fieldset disabled>
+        <legend>选择学分明细文件</legend>
+        <div>
+            <button id="select-all-detail-files">全选</button>
+            <button id="deselect-all-detail-files">全不选</button>
+            <button id="hide-invalid-detail-files">隐藏无效文件</button>
+        </div>
+        <div id="detail-book-list"></div>
+        <label id="no-valid-detail-files" hidden>未找到有效的学分明细文件</label>
+    </fieldset>
+
+    <fieldset disabled>
+        <legend>筛选学分汇总数据</legend>
+        <div>
+            <input type="checkbox" id="use-college-filter" name="summary-data-filter">
+            <label for="use-college-filter">学院：</label>
+            <select id="college-filter-input" disabled></select>
+        </div>
+        <div>
+            <input type="checkbox" id="use-grade-filter" name="summary-data-filter">
+            <label for="use-grade-filter">年级：</label>
+            <select id="grade-filter-operator" disabled>
+                <option value="greater">大于 ＞</option>
+                <option value="less">小于 ＜</option>
+                <option value="equal" selected>等于 ＝</option>
+            </select>
+            <input type="number" id="grade-filter-input" value="2023" step="1" disabled>
+        </div>
+        <div>
+            <input type="checkbox" id="use-class-filter" name="summary-data-filter">
+            <label for="use-class-filter">班级：</label>
+            <select id="class-filter-operator" disabled>
+                <option value="exact-match" selected>完全匹配</option>
+                <option value="partial-match">部分匹配</option>
+            </select>
+            <input type="text" id="class-filter-input" disabled>
+        </div>
+    </fieldset>
+
+    <fieldset disabled>
+        <legend>设置输出工作表</legend>
+        <div>
+            <label for="output-sheet-type">表格拆分方式：</label>
+            <select id="output-sheet-type">
+                <option value="sheet-type-college">按【学院】拆分</option>
+                <option value="sheet-type-grade" selected>按【年级】拆分</option>
+                <option value="sheet-type-class">按【班级】拆分</option>
+                <option value="sheet-type-all-in-one">不拆分为多个表格</option>
+            </select>
+        </div>
+        <div>
+            <label for="credit-standred-version">学分标准版本：</label>
+            <select id="credit-standred-version">
+                <option value="standred-version-auto" selected>自动识别</option>
+                <option value="standred-version-2019">2019版</option>
+                <option value="standred-version-2023">2023版</option>
+            </select>
+        </div>
+        <div>
+            <input type="checkbox" id="recalculate-total-credits" checked>
+            <label for="recalculate-total-credits">重新计算学分总和</label>
+        </div>
+        <div>
+            <input type="checkbox" id="convert-output-data-into-values" checked>
+            <label for="convert-output-data-into-values">输出数据转换为值</label>
+        </div>
+    </fieldset>
+
+    <button id="start-button" disabled>开始</button>
+
+    <p>版本 - 20260619A</p>
+</body>
+
+</html>
