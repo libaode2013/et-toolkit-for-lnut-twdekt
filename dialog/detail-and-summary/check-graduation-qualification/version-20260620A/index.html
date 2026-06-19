@@ -94,24 +94,28 @@
         <div>
             <label for="credit-standred-version">学分标准版本：</label>
             <select id="credit-standred-version">
-                <option value="standred-version-auto" selected>自动识别</option>
-                <option value="standred-version-2019">2019版</option>
-                <option value="standred-version-2023">2023版</option>
+                <option value="auto" selected>自动识别</option>
+                <option value="2019版">2019版</option>
+                <option value="2023版">2023版</option>
             </select>
         </div>
         <div>
             <input type="checkbox" id="recalculate-total-credits" checked>
-            <label for="recalculate-total-credits">重新计算学分总和</label>
+            <label for="recalculate-total-credits">重新计算总学分</label>
         </div>
         <div>
-            <input type="checkbox" id="convert-output-data-into-values" checked>
+            <input type="checkbox" id="colorful-mark-output-sheet">
+            <label for="colorful-mark-output-sheet">使用填充颜色标记数据</label>
+        </div>
+        <div>
+            <input type="checkbox" id="convert-output-data-into-values">
             <label for="convert-output-data-into-values">输出数据转换为值</label>
         </div>
     </fieldset>
 
     <button id="start-button" disabled>开始</button>
 
-    <p>旧版本 - 20260619A</p>
+    <p>版本 - 20260620A</p>
 </body>
 
 </html>

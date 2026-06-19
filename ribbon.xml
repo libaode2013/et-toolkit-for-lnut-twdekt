@@ -13,8 +13,9 @@
                     </splitButton>
                     <!-- 汇总+明细（检查毕业资格） -->
                     <splitButton id="dialog/detail-and-summary/check-graduation-qualification/latest-version" getImage="getImage">
-                        <button id="dialog/detail-and-summary/check-graduation-qualification/version-20260619A" label="汇总+明细（检查毕业资格）" onAction="onAction"></button>
+                        <button id="dialog/detail-and-summary/check-graduation-qualification/version-20260620A" label="汇总+明细（检查毕业资格）" onAction="onAction"></button>
                         <menu id="dialog/detail-and-summary/check-graduation-qualification/old-versions">
+                            <button id="dialog/detail-and-summary/check-graduation-qualification/version-20260619A" label="旧版本 - 20260619A" onAction="onAction"></button>
                             <button id="dialog/detail-and-summary/check-graduation-qualification/version-20260126A" label="旧版本 - 20260126A" onAction="onAction"></button>
                         </menu>
                     </splitButton>
