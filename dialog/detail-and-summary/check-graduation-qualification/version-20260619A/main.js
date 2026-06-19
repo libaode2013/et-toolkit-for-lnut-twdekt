@@ -159,7 +159,7 @@ function initializeUserInterface_buttonsForDetailBookList() {
     hideInvalid.addEventListener("click", function () {
         if (validList.length === 0) {
             hideInvalid.parentElement.setAttribute("hidden", "");
-            document.getElementById("detail-book-list").setAttribute("hidden");
+            document.getElementById("detail-book-list").setAttribute("hidden", "");
             document.getElementById("no-valid-detail-files").removeAttribute("hidden");
         }
         else {
