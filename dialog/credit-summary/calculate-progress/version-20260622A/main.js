@@ -501,6 +501,8 @@ function createOutputBook(summaryData) {
 
         if (outputSheetNameList.includes(outputSheet.Name)) {
             //  处理代码写在这
+            calculateOutputSheet(outputSheet);
+            formatOutputSheet(outputSheet);
         }
         else {
             outputSheet.Delete();
@@ -533,4 +535,118 @@ function initializeOutputSheet(outputBook, outputSheetName) {
     targetRange.Value2 = summaryTitleList;
 
     return outputSheet;
+}
+
+/**
+ * 计算输出工作表
+ * @param {Et.Worksheet} sheet 输出工作表
+ */
+function calculateOutputSheet(sheet) {
+
+    // 插入空列
+    const columnNumList = [15, 15, 15, 11, 11, 11, 6, 6];
+    for (let i = 0; i < columnNumList.length; i++) {
+        sheet.Columns.Item(columnNumList[i]).Insert(-4161);
+    }
+
+    const rowNumMax = sheet.UsedRange.Rows.Count;
+
+    // 根据设置的学分标准版本，写入公式
+    let startCell, endCell;
+    if (document.getElementById("credit-standred-version").value === "auto") {
+        // 根据学号前两位，计算入学年份
+        startCell = sheet.Cells.Item(2, 6);
+        endCell = sheet.Cells.Item(rowNumMax, 6);
+        startCell.Formula = '=VALUE("20"&LEFT(A2,2))';
+        startCell.AutoFill(sheet.Range(startCell, endCell), 1);
+        // 根据入学年份，计算标准版本
+        startCell = sheet.Cells.Item(2, 7);
+        endCell = sheet.Cells.Item(rowNumMax, 7);
+        startCell.Formula = '=IFS(F2>=2023,"2023版",F2<2023,"2019版")';
+        startCell.AutoFill(sheet.Range(startCell, endCell), 1);
+    }
+    else {
+        // 由于手动选择了标准版本，入学年份列写入横杠占位
+        startCell = sheet.Cells.Item(2, 6);
+        endCell = sheet.Cells.Item(rowNumMax, 6);
+        startCell.Value2 = "-";
+        startCell.AutoFill(sheet.Range(startCell, endCell), 1);
+        // 由于手动选择了标准版本，标准版本列直接写入
+        startCell = sheet.Cells.Item(2, 7);
+        endCell = sheet.Cells.Item(rowNumMax, 7);
+        startCell.Value2 = document.getElementById("credit-standred-version").value;
+        startCell.AutoFill(sheet.Range(startCell, endCell), 1);
+    }
+
+    // 将列号码和公式，按键值对存储到map
+    const columnFormulaMap = new Map();
+    // 总必修学分
+    columnFormulaMap.set(13, '=SUM(J2:L2)');
+    // 必修有效学分
+    columnFormulaMap.set(14, '=SUM(MIN(J2,2),MIN(K2,2),MIN(L2,1))');
+    // 必修完成进度
+    columnFormulaMap.set(15, '=N2/5');
+    // 总选修学分
+    columnFormulaMap.set(20, '=SUM(P2:S2)');
+    // 选修有效学分
+    columnFormulaMap.set(21, '=IFS(G2="2023版",MIN(P2+SUM(Q2:S2),P2+2,3),G2="2019版",MIN(T2,3))');
+    // 选修完成进度
+    columnFormulaMap.set(22, '=U2/3');
+    // 如果设置了【重新计算学分总和】，重新计算【总学分】
+    if (document.getElementById("recalculate-total-credits").checked) {
+        columnFormulaMap.set(23, '=SUM(M2,T2)');
+    }
+    // 总有效学分
+    columnFormulaMap.set(24, '=SUM(N2,U2)');
+    // 总完成进度
+    columnFormulaMap.set(25, '=X2/8');
+
+    for (const [columnNum, formulaStr] of columnFormulaMap) {
+        startCell = sheet.Cells.Item(2, columnNum);
+        endCell = sheet.Cells.Item(rowNumMax, columnNum);
+        startCell.Formula = formulaStr;
+        startCell.AutoFill(sheet.Range(startCell, endCell), 1);
+    }
+}
+
+/**
+ * 格式化输出工作表
+ * @param {Et.Worksheet} sheet 输出工作表
+ */
+function formatOutputSheet(sheet) {
+    // 如果设置了【输出数据转换为值】，复制并粘贴为值
+    if (document.getElementById("convert-output-data-into-values").checked) {
+        sheet.UsedRange.Copy();
+        sheet.Range("A1").PasteSpecial(-4163, -4142, false, false);
+    }
+
+    // 配置第1行标题
+    sheet.Range("H1:W1").Clear();
+    sheet.Range("F1:Y1").Value2 = ["入学年份", "标准版本", "统计开始时间", "统计结束时间", "必修学分", "", "", "", "", "", "选修学分", "", "", "", "", "", "", "总学分", "总有效学分", "总完成进度"];
+    // 配置第2行标题
+    sheet.Rows.Item(2).Insert(-4121);
+    sheet.Range("J2:V2").Value2 = ["思想成长", "创新创业", "志愿公益", "总必修学分", "有效学分", "完成进度", "实践实习", "文体活动", "工作履历", "技能特长", "总选修学分", "有效学分", "完成进度"];
+    // 合并单元格
+    const rangeAddrList = ["A1:A2", "B1:B2", "C1:C2", "D1:D2", "E1:E2", "F1:F2", "G1:G2", "H1:H2", "I1:I2", "J1:O1", "P1:V1", "W1:W2", "X1:X2", "Y1:Y2"];
+    for (const rangeAddr of rangeAddrList) {
+        sheet.Range(rangeAddr).Merge();
+    }
+
+    // 设置行高、列宽
+    sheet.UsedRange.RowHeight = 20;
+    const columnWidthList = [10, 8, 12, 5, 9, 8, 8, 12, 12, 8, 8, 8, 10, 8, 8, 8, 8, 8, 8, 10, 8, 8, 8, 10, 10];
+    for (let i = 0; i < columnWidthList.length; i++) {
+        sheet.Columns.Item(i + 1).ColumnWidth = columnWidthList[i];
+    }
+    // 设置对齐方式
+    sheet.UsedRange.HorizontalAlignment = -4108;
+    sheet.Range("B:C").HorizontalAlignment = -4131;
+    sheet.Range("E:E").HorizontalAlignment = -4131;
+    sheet.Range("1:2").HorizontalAlignment = -4108;
+
+    // 设置数据格式
+    sheet.Range("J:X").NumberFormatLocal = "0.00";
+    sheet.Range("O:O").NumberFormatLocal = "0.00%"
+    sheet.Range("V:V").NumberFormatLocal = "0.00%"
+    sheet.Range("Y:Y").NumberFormatLocal = "0.00%"
 }
