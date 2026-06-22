@@ -9,7 +9,8 @@ function onAction(control) {
         case "dialog/credit-summary/count-valid-credits/version-20260116A":
         case "dialog/credit-summary/count-valid-credits/version-20260122A":
         case "dialog/credit-summary/count-valid-credits/version-20260125A":
-            window.Application.ShowDialog(`${getUrlPath()}/${eleId}/index.html`, "学分汇总（统计有效学分）", 320 * window.devicePixelRatio, 640 * window.devicePixelRatio);
+        case "dialog/credit-summary/count-valid-credits/version-20260622A":
+            window.Application.ShowDialog(`${getUrlPath()}/${eleId}/index.html`, "学分汇总（计算有效学分）", 320 * window.devicePixelRatio, 640 * window.devicePixelRatio);
             break;
         case "dialog/detail-and-summary/check-graduation-qualification/version-20260126A":
         case "dialog/detail-and-summary/check-graduation-qualification/version-20260619A":

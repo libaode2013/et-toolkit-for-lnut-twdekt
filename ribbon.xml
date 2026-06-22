@@ -5,8 +5,9 @@
                 <group id="default-group" label="default-group">
                     <!-- 学分汇总（统计有效学分） -->
                     <splitButton id="dialog/credit-summary/count-valid-credits/latest-version" getImage="getImage">
-                        <button id="dialog/credit-summary/count-valid-credits/version-20260125A" label="学分汇总（统计有效学分）" onAction="onAction"></button>
+                        <button id="dialog/credit-summary/count-valid-credits/version-20260622A" label="学分汇总（计算有效学分）" onAction="onAction"></button>
                         <menu id="dialog/credit-summary/count-valid-credits/old-versions">
+                            <button id="dialog/credit-summary/count-valid-credits/version-20260125A" label="旧版本 - 20260125A" onAction="onAction"></button>
                             <button id="dialog/credit-summary/count-valid-credits/version-20260122A" label="旧版本 - 20260122A" onAction="onAction"></button>
                             <button id="dialog/credit-summary/count-valid-credits/version-20260116A" label="旧版本 - 20260116A" onAction="onAction"></button>
                         </menu>
@@ -19,7 +20,7 @@
                             <button id="dialog/detail-and-summary/check-graduation-qualification/version-20260126A" label="旧版本 - 20260126A" onAction="onAction"></button>
                         </menu>
                     </splitButton>
-                    <button id="version-button" label="版本 - 20260619A" getImage="getImage"></button>
+                    <button id="version-button" label="版本 - 20260622A" getImage="getImage"></button>
                 </group>
             </tab>
         </tabs>
